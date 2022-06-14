@@ -390,7 +390,7 @@ be built with Papyri. Future work includes extensions to be compatible with MyST
 (a project to bring Markdown syntax to Sphinx).
 
 To understand RST Syntax in narrative documentation, RST documents need to be parsed.
-To do so Papyri  uses `tree-sitter` and `tree-sitter-rst` projects, allowing us to
+To do so Papyri  uses tree-sitter [TS]_ and tree-sitter-rst [TSRST]_ projects, allowing us to
 extract an "Abstract syntax tree" (AST) from the text files. When using
 tree-sitter, AST nodes contain bytes-offsets into the original text buffer. Thus
 tree-sitter allowing us to easily "unparse" an AST node when necessary. This is
@@ -718,3 +718,5 @@ References
 .. [D3js] https://d3js.org/
 .. [flask] https://flask.palletsprojects.com/en/2.1.x/
 .. [CODEMETA] https://codemeta.github.io/
+.. [TS] https://tree-sitter.github.io/tree-sitter/
+.. [TSRST] https://github.com/stsewd/tree-sitter-rst
