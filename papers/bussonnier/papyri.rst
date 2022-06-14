@@ -697,33 +697,33 @@ Initiative (CZI) Essential Open Source Software for Science (EOS)
 References
 ----------
 
-.. [docutils] https://docutils.sourceforge.io/
-.. [sphinx] https://www.sphinx-doc.org/en/master/
-.. [mkdocs] https://www.mkdocs.org/
-.. [RTD] https://readthedocs.org/
-.. [RTD-theme] https://sphinx-rtd-theme.readthedocs.io/en/stable/
 .. [AOT] https://en.wikipedia.org/wiki/Ahead-of-time_compilation
-.. [JIT] https://en.wikipedia.org/wiki/Just-in-time_compilation
-.. [IR] https://en.wikipedia.org/wiki/Intermediate_representation
-.. [LTO] https://en.wikipedia.org/wiki/Interprocedural_optimization
-.. [DT] https://diataxis.fr/
 .. [CFRG] https://conda-forge.org/
+.. [CODEMETA] https://codemeta.github.io/
+.. [D3js] https://d3js.org/
+.. [DT] https://diataxis.fr/
+.. [IR] https://en.wikipedia.org/wiki/Intermediate_representation
+.. [JEDI] https://github.com/davidhalter/jedi
+.. [JIT] https://en.wikipedia.org/wiki/Just-in-time_compilation
+.. [Jinja2] https://jinja.palletsprojects.com/
+.. [LTO] https://en.wikipedia.org/wiki/Interprocedural_optimization
+.. [MPL-DOI] https://doi.org/10.5281/zenodo.6513224
+.. [MPL]  J. D. Hunter, "Matplotlib: A 2D Graphics Environment", Computing in Science & Engineering, vol. 9, no. 3, pp. 90-95, 2007, 
 .. [MYST] https://myst-parser.readthedocs.io/en/latest/
 .. [NPDOC] https://numpydoc.readthedocs.io/en/latest/format.html
-.. [SCU] https://en.wikipedia.org/wiki/Single_Compilation_Unit
-.. [Papyri] https://github.com/jupyter/papyri
-.. [sphinx-copybutton] https://sphinx-copybutton.readthedocs.io/en/latest/
-.. [pydata-sphinx-theme] https://pydata-sphinx-theme.readthedocs.io/en/stable/
-.. [msgspec] https://pypi.org/project/msgspec
-.. [D3js] https://d3js.org/
-.. [flask] https://flask.palletsprojects.com/en/2.1.x/
-.. [CODEMETA] https://codemeta.github.io/
-.. [TS] https://tree-sitter.github.io/tree-sitter/
-.. [TSRST] https://github.com/stsewd/tree-sitter-rst
-.. [JEDI] https://github.com/davidhalter/jedi
-.. [MPL]  J. D. Hunter, "Matplotlib: A 2D Graphics Environment", Computing in Science & Engineering, vol. 9, no. 3, pp. 90-95, 2007, 
-.. [MPL-DOI] https://doi.org/10.5281/zenodo.6513224
 .. [NP] Harris, C.R., Millman, K.J., van der Walt, S.J. et al. Array programming with NumPy. Nature 585, 357–362 (2020). DOI: 10.1038/s41586-020-2649-2
+.. [Papyri] https://github.com/jupyter/papyri
+.. [RTD-theme] https://sphinx-rtd-theme.readthedocs.io/en/stable/
+.. [RTD] https://readthedocs.org/
+.. [SCU] https://en.wikipedia.org/wiki/Single_Compilation_Unit
 .. [SP] Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, CJ Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E.A. Quintero, Charles R Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. (2020) SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17(3), 261-272. 10.1038/s41592-019-0686-2
 .. [Spyder] https://www.spyder-ide.org/
-.. [Jinja2] https://jinja.palletsprojects.com/
+.. [TSRST] https://github.com/stsewd/tree-sitter-rst
+.. [TS] https://tree-sitter.github.io/tree-sitter/
+.. [docutils] https://docutils.sourceforge.io/
+.. [flask] https://flask.palletsprojects.com/en/2.1.x/
+.. [mkdocs] https://www.mkdocs.org/
+.. [msgspec] https://pypi.org/project/msgspec
+.. [pydata-sphinx-theme] https://pydata-sphinx-theme.readthedocs.io/en/stable/
+.. [sphinx-copybutton] https://sphinx-copybutton.readthedocs.io/en/latest/
+.. [sphinx] https://www.sphinx-doc.org/en/master/
