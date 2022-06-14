@@ -98,7 +98,7 @@ and *Sphinx* [sphinx]_ are major cornerstones for publishing html documentation
 for *Python*. In fact, they are used by all the libraries in this ecosystem. While a few
 alternatives exist, most tools and services have some internal knowledge of
 *Sphinx*. For instance, Read the Docs [RTD]_ provides a specific *Sphinx* theme
-[RTD-theme]_ users can opt-in to, `Jupyter-book` is built on top of *Sphinx*, and
+[RTD-theme]_ users can opt-in to, `*Jupyter-book*` is built on top of *Sphinx*, and
 *MyST* parser [MYST]_ (which is made to allow markdown in documentation) 
 targets *Sphinx* as a backend, to name a few. All of the above provide an
 "ahead-of-time" documentation compilation and rendering, which is slow and
@@ -107,14 +107,14 @@ and configurations to properly build (which is almost always the case), it is
 relatively difficult to build documentation for a single object (like a single
 function, module or class). This makes AOT tools difficult to use for
 interactive exploration. One can then consider a JIT approach, as done
-for `Docrepr` (integrated both in `Jupyter` and *Spyder* [Spyder]_). However in that case,
+for `*Docrepr*` (integrated both in `Jupyter` and *Spyder* [Spyder]_). However in that case,
 interactive documentation lacks inline plots, crosslinks, indexing, search and
 many custom directives.
 
 Some of the above limitations are inherent to the design of documentation build
 tools that were intended for a separate documentation construction. While
 *Sphinx* does
-provide features like `intersphinx`, link resolutions are done at the documentation
+provide features like *intersphinx*, link resolutions are done at the documentation
 building phase. Thus, this is inherently unidirectional, and can break easily.
 To illustrate this, we consider *NumPy* [NP]_ and *SciPy* [SP]_, two extremely close
 libraries. In order to obtain proper cross-linked documentation, one is required to perform at least five
@@ -130,7 +130,7 @@ steps:
   
 - rebuild *NumPy* docs to make use of *SciPy*'s ``obj.inv``
 
-Only then can both *SciPy*'s and *NumPy*'s documentation refer to each other. As one can expect, crosslinks break every time a new version of a library is published [#]_. Pre-produced html in IDEs and other tools are then prone to error and difficult to maintain. This also raises security issues: some institutions become reluctant to use tools like `*Docrepr*` or viewing pre-produced html. 
+Only then can both *SciPy*'s and *NumPy*'s documentation refer to each other. As one can expect, cross links break every time a new version of a library is published [#]_. Pre-produced html in IDEs and other tools are then prone to error and difficult to maintain. This also raises security issues: some institutions become reluctant to use tools like `*Docrepr*` or viewing pre-produced html. 
 
 .. [#] `ipython/ipython#12210 <https://github.com/ipython/ipython/pull/12210>`_, `numpy/numpy#21016 <https://github.com/numpy/numpy/pull/21016>`_, `& #29073 <https://github.com/numpy/numpy/pull/20973>`_
 
@@ -414,14 +414,18 @@ and unparse to the raw text only if the directive requires it.
 
 Serialisation of data structure into IRD files is currently using a custom
 serialiser. Future work includes maybe swapping to msgspec [msgspec]_. The AST objects are completely typed, however they contain a number of unions and sequences of unions. It turns out, many frameworks like ``*pydantic*`` do not support sequences of unions where each item in the union may be of a different type.
+We know of only a few other documentation related project that treat AST as an intermediate
+object with a stable format that can be manipulated by external tools, the most
+popular one being Pandoc [pandoc]_, a project meant to convert from many type of
+documents to many other.
 
 The current *Papyri* strategy is to type-infer all code examples with *Jedi* [JEDI]_, and pre-syntax highlight using `pygments` when possible.
 
 IRD File Installation
 ---------------------
 
-Download and installation of IRD files is done concurrently using ``*httpx*``,
-with ``*trio*`` as an async framework, allowing us to download files concurrently.
+Download and installation of IRD files is done concurrently using *httpx* [httpx]_,
+with *trio* [trio]_ as an async framework, allowing us to download files concurrently.
 
 The current implementation of *Papyri* targets Python documentation and
 is written in Python. We can then query the existing version of Python libraries
@@ -498,7 +502,7 @@ The current *Papyri* implementation includes a certain number of rendering engin
 of them mostly consists of fetching a single page with its metadata, and
 walking through the IRD AST tree, and rendering each node with users' preferences. 
 
-- An ASCII terminal renders using Jinja2 [Jinja2]_. This can be useful for piping
+- An ASCII terminal renders using *Jinja2* [Jinja2]_. This can be useful for piping
   documentation to other tools like ``grep``, ``less``, ``cat``. 
   Then one can work in a highly restricted environment, making sure that
   reading the documentation is coherent. This can serve as a proxy for screen reading.
@@ -512,8 +516,8 @@ walking through the IRD AST tree, and rendering each node with users' preference
   having images stored raw on disk is useful as it allows us to directly call
   into a system image viewer to display them.
 
-- A JIT rendering engine uses Jinja2, `*Quart*`, `*Trio*`. *Quart* is an async
-  version of `*flask*` [flask]_. This option contains the most features, and therefore is the
+- A JIT rendering engine uses *Jinja2*, *Quart* [quart]_, *Trio*. *Quart* is an async
+  version of *flask* [flask]_. This option contains the most features, and therefore is the
   main one used for development. This environment lets us iterate over the rendering engine rapidly.
 
   We used this renderer to explore the User Interface design and navigation. In
@@ -733,8 +737,12 @@ References
 .. [TS] https://tree-sitter.github.io/tree-sitter/
 .. [docutils] https://docutils.sourceforge.io/
 .. [flask] https://flask.palletsprojects.com/en/2.1.x/
+.. [httpx] https://www.python-httpx.org/
 .. [mkdocs] https://www.mkdocs.org/
 .. [msgspec] https://pypi.org/project/msgspec
+.. [pandoc] https://pandoc.org/
 .. [pydata-sphinx-theme] https://pydata-sphinx-theme.readthedocs.io/en/stable/
+.. [quart] https://pgjones.gitlab.io/quart/
 .. [sphinx-copybutton] https://sphinx-copybutton.readthedocs.io/en/latest/
 .. [sphinx] https://www.sphinx-doc.org/en/master/
+.. [trio] https://trio.readthedocs.io/
