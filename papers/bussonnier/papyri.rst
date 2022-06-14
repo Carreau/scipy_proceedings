@@ -97,7 +97,7 @@ In the scientific *Python* ecosystem, it is well known that *Docutils* [docutils
 and *Sphinx* [sphinx]_ are major cornerstones for publishing html documentation
 for *Python*. In fact, they are used by all the libraries in this ecosystem. While a few
 alternatives exist, most tools and services have some internal knowledge of
-Sphinx. For instance, Read the Docs [RTD]_ provides a specific *Sphinx* theme
+*Sphinx*. For instance, Read the Docs [RTD]_ provides a specific *Sphinx* theme
 [RTD-theme]_ users can opt-in to, `Jupyter-book` is built on top of *Sphinx*, and
 *MyST* parser [MYST]_ (which is made to allow markdown in documentation) 
 targets *Sphinx* as a backend, to name a few. All of the above provide an
@@ -130,7 +130,7 @@ steps:
   
 - rebuild *NumPy* docs to make use of *SciPy*'s ``obj.inv``
 
-Only then can both SciPy's and NumPy's documentation refer to each other. As one can expect, crosslinks break every time a new version of a library is published [#]_. Pre-produced html in IDEs and other tools are then prone to error and difficult to maintain. This also raises security issues: some institutions become reluctant to use tools like `Docrepr` or viewing pre-produced html. 
+Only then can both *SciPy*'s and *NumPy*'s documentation refer to each other. As one can expect, crosslinks break every time a new version of a library is published [#]_. Pre-produced html in IDEs and other tools are then prone to error and difficult to maintain. This also raises security issues: some institutions become reluctant to use tools like `*Docrepr*` or viewing pre-produced html. 
 
 .. [#] `ipython/ipython#12210 <https://github.com/ipython/ipython/pull/12210>`_, `numpy/numpy#21016 <https://github.com/numpy/numpy/pull/21016>`_, `& #29073 <https://github.com/numpy/numpy/pull/20973>`_
 
@@ -142,7 +142,7 @@ The *Numpydoc* format is ubiquitous among the scientific ecosystem [NPDOC]_. It
 is loosely based on *RST* syntax, and despite supporting full *RST* syntax,
 docstrings rarely contain full-featured directive. Maintainers are confronted to the following dilemma:
 
-- keep the docstrings simple. This means mostly text-based docstrings with few directive for efficient readability. The end-user may be exposed to raw docstring, there is no on-the-fly directive interpretation. This is the case for tools such as IPython and Jupyter. 
+- keep the docstrings simple. This means mostly text-based docstrings with few directive for efficient readability. The end-user may be exposed to raw docstring, there is no on-the-fly directive interpretation. This is the case for tools such as *IPython* and *Jupyter*. 
 
 - write an extensive docstring. This includes references, and directive that
   potentially creates graphics, tables and more, allowing an enriched end-user experience. However this may be computationally intensive, and executing code to view docs could be a security risk.
@@ -173,9 +173,9 @@ at. That is to say single-project websites where appearance, layout, domain need
 controlled by the author is not part of the objectives.
 
 **Goal (b): create a uniform documentation structure and syntax.**
-The *Papyri* project prescribes stricter requirements in terms of format and structure compared to other tools such as Docutils and *Sphinx*. When possible, the documentation follows the Diátaxis Framework [DT]_. This provides a uniform documentation setup and syntax, simplifying contributions to the project and easing error catching at compile time. 
+The *Papyri* project prescribes stricter requirements in terms of format and structure compared to other tools such as *Docutils* and *Sphinx*. When possible, the documentation follows the *Diátaxis* Framework [DT]_. This provides a uniform documentation setup and syntax, simplifying contributions to the project and easing error catching at compile time. 
 Such strict environment is qualitatively supported by a number of documentation fixes done upstream during the development stage of the project [#]_.
-Since *Papyri* is not fully customisable, users who are already using documentation tools such as *Sphinx*, mkdocs [mkdocs]_ and others should expect their project to require minor modifications to work with *Papyri*. 
+Since *Papyri* is not fully customisable, users who are already using documentation tools such as *Sphinx*, *mkdocs* [mkdocs]_ and others should expect their project to require minor modifications to work with *Papyri*. 
 
 .. [#] Tests have been performed on `NumPy <https://github.com/numpy/numpy/pulls?q=is%3Apr+is%3Aclosed+author%3ACarreau>`_, `SciPy <https://github.com/scipy/scipy/pulls?q=is%3Apr+is%3Aclosed+author%3ACarreau>`_.
 
@@ -184,14 +184,14 @@ Since *Papyri* is not fully customisable, users who are already using documentat
 Accessibility is a top priority of the project. To that aim, items are associated to semantic meaning as much as possible, and documentation rendering is separated from documentation building phase. That way, accessibility features such as high contract themes (for better text-to-speech (TTS) raw data), early example highlights (for newcomers) and type annotation (for advanced users) can be quickly available. With the uniform documentation structure, this provides a coherent experience where users become more comfortable finding information in a single location (see Fig :ref:`oldnew`).
 
 **Goal (d): make documentation building simple, fast, and independent.**
-One objective of the project is to make documentation installation and rendering relatively straightforward and fast. To that aim, the project includes relative independence of documentation building across libraries, allowing bidirectional crosslinks (i.e. both forward and backward links between pages) to be maintained more easily. In other words, a single library can be built without the need to access documentation from another. Also, the project should include straightforward lookup documentation for an object from the
+One objective of the project is to make documentation installation and rendering relatively straightforward and fast. To that aim, the project includes relative independence of documentation building across libraries, allowing bidirectional cross links (i.e. both forward and backward links between pages) to be maintained more easily. In other words, a single library can be built without the need to access documentation from another. Also, the project should include straightforward lookup documentation for an object from the
 interactive read–eval–print loop (REPL). Finally, efforts are put to limit the installation speed (to avoid polynomial growth when installing packages on large distributed systems).
 
 .. **TO MB: should IRD be introduced in this section then ??**
 .. MB: I dont' think so, as IRD is not a goal but  a solution ? 
 
 The *Papyri* solution
-+++++++++++++++++++
++++++++++++++++++++++
 
 In this section we describe in more detail how *Papyri* has been implemented to address the objectives mentioned above. 
 
@@ -257,7 +257,7 @@ one can take IRD from multiple producers at once, and render them all to a
 single target, breaking the silos between libraries.
 
 At the moment, IRD files are currently separated into four main categories
-roughly following the Diátaxis framework [DT]_ and some technical needs:
+roughly following the *Diátaxis* framework [DT]_ and some technical needs:
 
 - API files describe the documentation for a single object, expressed as a
   *JSON* object. When possible, the information is encoded semantically (Objective (c)).
@@ -274,8 +274,8 @@ roughly following the Diátaxis framework [DT]_ and some technical needs:
   three ones. They are the only ones that contain backward references, and no forward references.
 
 In addition to the four categories above, metadata about the current package is
-stored: this includes library name, current version, PyPi name, GitHub repository slug [#]_, maintainers' names,
-logo, issue tracker and others. In particular, metadata allows us to autogenerate
+stored: this includes library name, current version, *PyPi* name, *GitHub* repository slug [#]_, maintainers' names,
+logo, issue tracker and others. In particular, metadata allows us to auto-generate
 links to issue trackers, and to source files when rendering. 
 In order to properly resolve some references and normalize links convention, we also store a mapping from fully qualified names to canonical ones.
 
@@ -284,7 +284,7 @@ In order to properly resolve some references and normalize links convention, we 
    repository on a platform like GitHub.
 
 The exact structure of package metadata is not yet defined, we currently limit
-it to the minimum functional. While we could adopt formats like codemeta
+it to the minimum functional. While we could adopt formats like *codemeta*
 [CODEMETA]_, we want to avoid duplicating information, and would prefer to rely
 on metadata already present in the published packages, or extracting from source
 repository GitHub.
@@ -636,7 +636,7 @@ two versions.
 Conclusion
 ++++++++++
 
-To address some of the current limitations in documentation accessibility, building and maintaining, we have provided a new documentation framework called *Papyri*. We presented its features and underlying implementation choices (such as crosslink maintainance, decoupling building and rendering phases, enriching the rendering features, using the IRD format to create a unified syntax structure, etc.). While the project is still at its early stage, clear impacts can already be seen on the availability of high-quality documentation for end-users, and on the workload reduction for maintainers. Building IRD format opened a wide range of technical possibilities, and contributes to improving users' experience (and therefore the success of the scientific *Python* ecosystem). This may become necessary for users to navigate in an exponentially growing
+To address some of the current limitations in documentation accessibility, building and maintaining, we have provided a new documentation framework called *Papyri*. We presented its features and underlying implementation choices (such as crosslink maintenance, decoupling building and rendering phases, enriching the rendering features, using the IRD format to create a unified syntax structure, etc.). While the project is still at its early stage, clear impacts can already be seen on the availability of high-quality documentation for end-users, and on the workload reduction for maintainers. Building IRD format opened a wide range of technical possibilities, and contributes to improving users' experience (and therefore the success of the scientific *Python* ecosystem). This may become necessary for users to navigate in an exponentially growing
 ecosystem.
 
 Acknowledgments
