@@ -546,7 +546,7 @@ compiled language (like Rust, using compiled and typed checked templates). This 
 Finally, a *JupyterLab* extension is currently in progress. The documentation then presents itself as
 a side-panel and is capable of basic browsing and rendering (see Figure :ref:`oldnew` and Figure :ref:`jlab`). The model uses *typescript*,
 react and native JupyterLab component. Future goals include improving/replacing the
-*JupyterLab*'s ``?`` and the *JupyterLab* Inspector (when possible). A screenshot of the current development version of the JupyterLab
+*JupyterLab*'s question mark operator (``obj?``) and the *JupyterLab* Inspector (when possible). A screenshot of the current development version of the JupyterLab
 extension can be seen in Figure :ref:`jlab`.
 
 
