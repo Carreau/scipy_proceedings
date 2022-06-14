@@ -16,7 +16,7 @@ Papyri: better documentation for the scientific ecosystem in Jupyter
 
 .. class:: abstract
 
-   We present here the idea behind Papyri, a framework we are developing to
+   We present here the idea behind *Papyri*, a framework we are developing to
    provide a better documentation experience for the scientific ecosystem. In
    particular, we wish to provide a documentation browser (from within Jupyter or
    other IDEs and Python editors) that gives a unified experience, cross library
@@ -66,13 +66,13 @@ libraries of the scientific Python should be available.
 
 Thus, against all advice we received and based on our own experience, we have decided to
 rebuild an *opinionated* documentation framework, from scratch, and with minimal
-dependencies: *Papyri*. Papyri focuses on building an intermediate
+dependencies: *Papyri*. *Papyri* focuses on building an intermediate
 documentation representation format, that lets us decouple building, and
 rendering the docs. This highly simplifies many operations and gives us access
 to many desired features that were not available up to now.
 
-In what follows, we provide the framework in which Papyri has been created and
-present its objectives (context and goals), we describe the Papyri features
+In what follows, we provide the framework in which *Papyri* has been created and
+present its objectives (context and goals), we describe the *Papyri* features
 (format, installation, and usage), then present its current implementation. We
 end this paper with comments on current challenges and future work.
 
@@ -86,7 +86,7 @@ terminology. In particular, similarities with "ahead-of-time" (AOT) [AOT]_,
 optimization (LTO) [LTO]_, static vs dynamic linking will be highlighted. This
 allows us to clarify the presentation of the underlying architecture. However, there
 is no requirement to be familiar with the above to understand the concepts
-underneath Papyri. In that context, we wish to discuss documentation building as
+underneath *Papyri*. In that context, we wish to discuss documentation building as
 a process from a source-code meant for a machine to a final output targeting the
 flesh and blood machine between the keyboard and the chair. 
 
@@ -94,13 +94,13 @@ Current tools and limitations
 -----------------------------
 
 In the scientific Python ecosystem, it is well known that Docutils [docutils]_
-and Sphinx [sphinx]_ are major cornerstones for publishing html documentation
+and *Sphinx* [sphinx]_ are major cornerstones for publishing html documentation
 for Python. In fact, they are used by all the libraries in this ecosystem. While a few
 alternatives exist, most tools and services have some internal knowledge of
-Sphinx. For instance, Read the Docs [RTD]_ provides a specific Sphinx theme
-[RTD-theme]_ users can opt-in to, `Jupyter-book` is built on top of Sphinx, and
+Sphinx. For instance, Read the Docs [RTD]_ provides a specific *Sphinx* theme
+[RTD-theme]_ users can opt-in to, `Jupyter-book` is built on top of *Sphinx*, and
 MyST parser [MYST]_ (which is made to allow markdown in documentation) 
-targets Sphinx as a backend, to name a few. All of the above provide an
+targets *Sphinx* as a backend, to name a few. All of the above provide an
 "ahead-of-time" documentation compilation and rendering, which is slow and
 computationally intensive. When a project needs its specific plugins, extensions
 and configurations to properly build (which is almost always the case), it is
@@ -112,7 +112,8 @@ interactive documentation lacks inline plots, crosslinks, indexing, search and
 many custom directives.
 
 Some of the above limitations are inherent to the design of documentation build
-tools that were intended for a separate documentation construction. While Sphinx does
+tools that were intended for a separate documentation construction. While
+*Sphinx* does
 provide features like `intersphinx`, link resolutions are done at the documentation
 building phase. Thus, this is inherently unidirectional, and can break easily.
 To illustrate this, we consider NumPy [NP]_ and SciPy [SP]_, two extremely close
@@ -153,7 +154,7 @@ displayed in docstrings, and Fig :ref:`oldnew`). In terms of format, markdown is
 .. figure:: scipy-dpss-old-new.png
 
    The following screenshot shows the help for ``scipy.signal.dpss``, as
-   currently accessible (left), as shown by Papyri for Jupyterlab
+   currently accessible (left), as shown by *Papyri* for Jupyterlab
    extension (right). An extended version of the right pannel is displayed in
    Fig :ref:`jlab`. :label:`oldnew`
 
@@ -161,20 +162,20 @@ displayed in docstrings, and Fig :ref:`oldnew`). In terms of format, markdown is
 Objectives of the project
 -------------------------
 
-We now layout the objectives of the Papyri documentation framework. 
-Let us emphasize that the project is in no way intended to replace or cover many features included in well-established documentation tools such as Sphinx or Jupyter-book.
-Those projects are extremely flexible and meet the needs of their users. The Papyri project addresses specific documentation challenges (mentioned above), we present below what is (and what is not) the scope of work.
+We now layout the objectives of the *Papyri* documentation framework. 
+Let us emphasize that the project is in no way intended to replace or cover many features included in well-established documentation tools such as *Sphinx* or Jupyter-book.
+Those projects are extremely flexible and meet the needs of their users. The *Papyri* project addresses specific documentation challenges (mentioned above), we present below what is (and what is not) the scope of work.
 
 **Goal (a): design a non-generic (non fully customisable) website builder.**
 When authors want or need complete control of the output and wide
-personalisation options, or branding, then Papyri is not likely the project to look
+personalisation options, or branding, then *Papyri* is not likely the project to look
 at. That is to say single-project websites where appearance, layout, domain need to be
 controlled by the author is not part of the objectives.
 
 **Goal (b): create a uniform documentation structure and syntax.**
-The Papyri project prescribes stricter requirements in terms of format and structure compared to other tools such as Docutils and Sphinx. When possible, the documentation follows the Diátaxis Framework [DT]_. This provides a uniform documentation setup and syntax, simplifying contributions to the project and easing error catching at compile time. 
+The *Papyri* project prescribes stricter requirements in terms of format and structure compared to other tools such as Docutils and *Sphinx*. When possible, the documentation follows the Diátaxis Framework [DT]_. This provides a uniform documentation setup and syntax, simplifying contributions to the project and easing error catching at compile time. 
 Such strict environment is qualitatively supported by a number of documentation fixes done upstream during the development stage of the project [#]_.
-Since Papyri is not fully customisable, users who are already using documentation tools such as Sphinx, mkdocs [mkdocs]_ and others should expect their project to require minor modifications to work with Papyri. 
+Since *Papyri* is not fully customisable, users who are already using documentation tools such as *Sphinx*, mkdocs [mkdocs]_ and others should expect their project to require minor modifications to work with *Papyri*. 
 
 .. [#] Tests have been performed on `NumPy <https://github.com/numpy/numpy/pulls?q=is%3Apr+is%3Aclosed+author%3ACarreau>`_, `SciPy <https://github.com/scipy/scipy/pulls?q=is%3Apr+is%3Aclosed+author%3ACarreau>`_.
 
@@ -189,10 +190,10 @@ interactive read–eval–print loop (REPL). Finally, efforts are put to limit t
 .. **TO MB: should IRD be introduced in this section then ??**
 .. MB: I dont' think so, as IRD is not a goal but  a solution ? 
 
-The Papyri solution
+The *Papyri* solution
 +++++++++++++++++++
 
-In this section we describe in more detail how Papyri has been implemented to address the objectives mentioned above. 
+In this section we describe in more detail how *Papyri* has been implemented to address the objectives mentioned above. 
 
 
 Making documentation a multi-step process
@@ -221,7 +222,7 @@ light/dark theme.
 Being able to modify extensions and re-render the documentation without the
 rebuilding and executing stage is quite appealing. Thus, the building phase in
 Papyri (collecting documentation information) is separated from the rendering
-phase (Objective (c)): at this step, Papyri has no knowledge and no
+phase (Objective (c)): at this step, *Papyri* has no knowledge and no
 configuration options that permit to modify the appearance of the final
 documentation. Additionally, the optional rendering process has no knowledge of
 the building step, and can be run without accessing the libraries involved.
@@ -235,7 +236,7 @@ proposed in Objectives (c), (d) (see Fig :ref:`diag`).
 .. figure:: diagramme.png
    :figclass: w
 
-   Sketch representing how to build documentation with Papyri. Step 1: Each project
+   Sketch representing how to build documentation with *Papyri*. Step 1: Each project
    builds an IRD bundle that contains semantic information about the project
    documentation. Step 2: the IRD bundles are publihsed online. Step 3: users install IRD bundles locally on their machine, pages get corsslinked, indexed, etc. Step 4: IDEs render documentation on-the-fly, taking into consideration users' preferences. :label:`diag`
 
@@ -303,7 +304,7 @@ plan on publishing a JSON schema, full specification and more in depth descripti
 ~~~~~~~~~~~~~~~
 
 Once a library has collected IRD representation for all documentation items
-(functions, class, narrative sections, tutorials, examples), Papyri consolidates them into what we will refer to as IRD bundles. A Bundle gathers all IRD files and metadata for a single version of a library [#]_. Bundles are a
+(functions, class, narrative sections, tutorials, examples), *Papyri* consolidates them into what we will refer to as IRD bundles. A Bundle gathers all IRD files and metadata for a single version of a library [#]_. Bundles are a
 convenient unit to speak about publication, installation, or update of a given
 library documentation files.
 
@@ -328,17 +329,17 @@ Papyri-based documentation involves three broad categories of stakeholders
 (library maintainers, end-users, IDE developers), and processes. This leads to
 certain requirements for IRD files and bundles.
 
-On the maintainers' side, the goal is to ensure that Papyri can build IRD files, and publish IRD bundles. Creation of IRD files and bundles is the most computationally intensive step. It
+On the maintainers' side, the goal is to ensure that *Papyri* can build IRD files, and publish IRD bundles. Creation of IRD files and bundles is the most computationally intensive step. It
 may require complex dependencies, or specific plugins. Thus, this can be a
-multi-step process, or one can use external tooling (not related to Papyri nor
+multi-step process, or one can use external tooling (not related to *Papyri* nor
 using Python) to create them. Visual appearance and rendering of documentation is
-not taken into account in this process. Overall, building IRD files and bundles takes about the same amount of time as running a full Sphinx build. The limiting factor is often associated to executing library examples and code snippets. For example, building SciPy & NumPy documentation
+not taken into account in this process. Overall, building IRD files and bundles takes about the same amount of time as running a full *Sphinx* build. The limiting factor is often associated to executing library examples and code snippets. For example, building SciPy & NumPy documentation
 IRD files on a 2021 Macbook Pro M1 (base model), including executing examples in
 most docstrings and type inferring most examples (with most variables
 semantically inferred) can take several minutes. 
 
 End-users are responsible for installing desired IRD bundles. In most cases, it
-will consist of IRD bundles from already installed libraries. While Papyri is
+will consist of IRD bundles from already installed libraries. While *Papyri* is
 not currently integrated with package managers or IDEs, one could imagine
 this process being automatic, or on demand. This step should be fairly efficient
 as it mostly requires downloading and unpacking IRD files.
@@ -356,7 +357,7 @@ We present here some of the technological choices made in the current *Papyri*
 implementation. The current implementation is targeting only a subset of
 projects and users that could make use of IRD, and are thus highly opinionated
 in order to minimise current scope and development effort. Understanding the
-implementation should also **not** be **necessary to use** Papyri either as a maintainer
+implementation should also **not** be **necessary to use** *Papyri* either as a maintainer
 or as a user, but can help understanding some of the current limitation.
 
 Nothing prevent alternatives and complementary implementations with different
@@ -378,7 +379,7 @@ main code base fast.
 IRD files generation
 --------------------
 
-The current implementation of Papyri only targets some compatibility
+The current implementation of *Papyri* only targets some compatibility
 with *Sphinx* (a website and PDF documentation builder), reStructuredText (RST) as
 narrative documentation syntax and *Numpydoc* (both a project and standard for
 docstring formatting).
@@ -387,11 +388,11 @@ These are widely used by a majority of the core scientific Python ecosystem, and
 thus having *Papyri* and IRD bundles compatible with existing project is a
 critical goal. We estimate that currently about 85% to 90% of current
 documentation pages currently being built with *Sphinx*, *RST* and *Numdoc* works can
-be built with Papyri. Future work includes extensions to be compatible with *MyST*
+be built with *Papyri*. Future work includes extensions to be compatible with *MyST*
 (a project to bring *Markdown* syntax to *Sphinx*), but is not a priority.
 
 To understand *RST* Syntax in narrative documentation, *RST* documents need to be parsed.
-To do so Papyri  uses tree-sitter [TS]_ and tree-sitter-rst [TSRST]_ projects, allowing us to
+To do so *Papyri*  uses tree-sitter [TS]_ and tree-sitter-rst [TSRST]_ projects, allowing us to
 extract an "Abstract Syntax Tree" (AST) from the text files. When using
 tree-sitter, AST nodes contain bytes-offsets into the original text buffer. Thus
 tree-sitter allowing us to easily "unparse" an AST node when necessary. This is
@@ -403,7 +404,7 @@ provide an example: *RST* directives are usually of the form::
       
       body
 
-While technically there is no space before the ``::``, Docutils and Sphinx will not create errors when building the documentation. Due to our choice of a rigid (but unified) structure, we use tree-sitter that indicates an error node if there is an extra space. This allows us to check for error nodes, unparse, add heuristics to restore a proper syntax, then parse again to obtain the new node.
+While technically there is no space before the ``::``, Docutils and *Sphinx* will not create errors when building the documentation. Due to our choice of a rigid (but unified) structure, we use tree-sitter that indicates an error node if there is an extra space. This allows us to check for error nodes, unparse, add heuristics to restore a proper syntax, then parse again to obtain the new node.
 
 Alternatively, a number of directives like ``warnings``, ``notes``
 ``admonitions`` still contain valid RST. Instead of storing the directive with
@@ -414,7 +415,7 @@ and unparse to the raw text only if the directive requires it.
 Serialisation of data structure into IRD files is currently using a custom
 serialiser. Future work includes maybe swapping to msgspec [msgspec]_. The AST objects are completely typed, however they contain a number of unions and sequences of unions. It turns out, many frameworks like ``pydantic`` do not support sequences of unions where each item in the union may be of a different type.
 
-The current Papyri strategy is to type-infer all code examples with *Jedi* [JEDI]_, and pre-syntax highlight using `pygments` when possible.
+The current *Papyri* strategy is to type-infer all code examples with *Jedi* [JEDI]_, and pre-syntax highlight using `pygments` when possible.
 
 IRD File Installation
 ---------------------
@@ -422,7 +423,7 @@ IRD File Installation
 Download and installation of IRD files is done concurrently using ``httpx``,
 with ``trio`` as an async framework, allowing us to download files concurrently.
 
-The current implementation of Papyri targets Python documentation and
+The current implementation of *Papyri* targets Python documentation and
 is written in Python. We can then query the existing version of Python libraries
 installed, and infer the appropriate version of the requested documentation. At the moment, the
 implementation is set to tentatively guess relevant libraries versions when the
@@ -477,7 +478,7 @@ operations like adding/removing/replacing documents.
 
 .. figure:: graphstore.png
 
-   Local implementation of papyri stores informations in 3 different format depending on
+   Local implementation of *Papyri* stores informations in 3 different format depending on
    access patterns. A SQLite database for relationship information, on-disk CBOR
    files for more compact storate of IRD, and RAW files (e.g. Images). A `GraphStore`
    API abstract those access and takes care of maintinaing consistency. :label:`GraphStore`
@@ -492,7 +493,7 @@ storage for random access.
 Documentation Rendering
 -----------------------
 
-The current Papyri implementation includes a certain number of rendering engines (presented below). Each
+The current *Papyri* implementation includes a certain number of rendering engines (presented below). Each
 of them mostly consists of fetching a single page with its metadata, and
 walking through the IRD AST tree, and rendering each node with users' preferences. 
 
@@ -522,19 +523,19 @@ walking through the IRD AST tree, and rendering each node with users' preference
   similar information. This representation also have challenges when pages have
   a large number of back references as the graph become too busy.
 
-  We've experience here one of the advantage of the papyri architecture,
+  We've experience here one of the advantage of the *Papyri* architecture,
   creating this network visualization did not require any regeneration of the documentation.
   We only had to update the template and re-render the current page.
 
 - A static AOT rendering of all the existing pages that can be
   rendered ahead of time uses the same class as the JIT rendering. Basically, this loops through all entries in the SQLite database and renders
-  each item independently. This renderer is mostly used for exhaustive testing and performance measures for Papyri. This can render most of the API documentation of IPython, `Astropy`, `Dask`, `Distributed`, Matplotlib [MPL]_ [MPL-DOI]_, `Networkx`, NumPy [NP]_, `Pandas`, Papyri, SciPy, `Scikit-image` and others. It can represent ~28000 pages in ~60 seconds (that is ~450 pages/s on a recent Macbook pro M1).
+  each item independently. This renderer is mostly used for exhaustive testing and performance measures for *Papyri*. This can render most of the API documentation of IPython, `Astropy`, `Dask`, `Distributed`, Matplotlib [MPL]_ [MPL-DOI]_, `Networkx`, NumPy [NP]_, `Pandas`, *Papyri*, SciPy, `Scikit-image` and others. It can represent ~28000 pages in ~60 seconds (that is ~450 pages/s on a recent Macbook pro M1).
   
 
 For all of the above renderers, profiling shows that documentation rendering is
 mostly limited by object de-serialisation from disk and Jinja2
 templating engine. In the early project development phase, we attempted to write a static html renderer in a
-compiled language (like Rust, using compiled and typed checked templates). This provided a speedup of roughly a factor 10. However, its implementation is now out of sync with the main Papyri code base. 
+compiled language (like Rust, using compiled and typed checked templates). This provided a speedup of roughly a factor 10. However, its implementation is now out of sync with the main *Papyri* code base. 
 
 
 Finally, a JupyterLab extension is currently in progress. The documentation then presents itself as
@@ -548,7 +549,7 @@ extension can be seen in Figure :ref:`jlab`.
    :scale: 80%
 
 
-   Example of extended view of the Papyri documentation for Jupyterlab extension (here for SciPy). Code examples can now include plots. Most token in each examples are linked to the corresponding page. Early navigation bar is visible at the top.  :label:`jlab`
+   Example of extended view of the *Papyri* documentation for Jupyterlab extension (here for SciPy). Code examples can now include plots. Most token in each examples are linked to the corresponding page. Early navigation bar is visible at the top.  :label:`jlab`
 
 
 .. figure:: local-graph.png
@@ -560,11 +561,11 @@ extension can be seen in Figure :ref:`jlab`.
 Challenges
 ++++++++++
 
-We mentioned above some limitations we encountered (in rendering usage for instance) and what will be done in the future to address them. We provide below some limitations related to syntax choices, and broader opportunities that arise from the Papyri project. 
+We mentioned above some limitations we encountered (in rendering usage for instance) and what will be done in the future to address them. We provide below some limitations related to syntax choices, and broader opportunities that arise from the *Papyri* project. 
 
 Limitations
 -----------
-The decoupling of the building and rendering phases is key in Papyri. However, it requires us to come up with a method that uniquely identifies each object. In particular, this is essential in order to link any object documentation without accessing the IRD bundles build from all the libraries. To that aim, we use the fully qualified names of an object. Namely, each object is identified by the concatenation of the module in which it is defined, with its local name. Nonetheless, several particular cases need specific treatment. 
+The decoupling of the building and rendering phases is key in *Papyri*. However, it requires us to come up with a method that uniquely identifies each object. In particular, this is essential in order to link any object documentation without accessing the IRD bundles build from all the libraries. To that aim, we use the fully qualified names of an object. Namely, each object is identified by the concatenation of the module in which it is defined, with its local name. Nonetheless, several particular cases need specific treatment. 
 
 - To mirror the Python syntax, is it easy to use ``.`` to concatenate both parts. 
   Unfortunately, that leads to some ambiguity when modules re-export functions have
@@ -593,17 +594,17 @@ The decoupling of the building and rendering phases is key in Papyri. However, i
   MacOS file systems, a couple of objects may unfortunately refer to the same IRD file
   on disk. To address this, a case-sensitive hash is appended at the end of the filename.
 
-- Many libraries have a syntax that `looks` right once rendered to HTML while not following proper syntax, or a syntax that relies on specificities of Docutils and Sphinx
+- Many libraries have a syntax that `looks` right once rendered to HTML while not following proper syntax, or a syntax that relies on specificities of Docutils and *Sphinx*
   rendering/parsing.
 
-- Many custom directive plugins cannot be reused from Sphinx. These will need to be
+- Many custom directive plugins cannot be reused from *Sphinx*. These will need to be
   reimplemented.
 
 Future possibilities
 --------------------
 
 Beyond what has been presented in this paper, there are several opportunities
-to improve and extend what Papyri can allow for the scientific Python
+to improve and extend what *Papyri* can allow for the scientific Python
 ecosystem.
 
 The first area is the ability to build IRD bundles on
@@ -634,7 +635,7 @@ two versions.
 Conclusion
 ++++++++++
 
-To address some of the current limitations in documentation accessibility, building and maintaining, we have provided a new documentation framework called Papyri. We presented its features and underlying implementation choices (such as crosslink maintainance, decoupling building and rendering phases, enriching the rendering features, using the IRD format to create a unified syntax structure, etc.). While the project is still at its early stage, clear impacts can already be seen on the availability of high-quality documentation for end-users, and on the workload reduction for maintainers. Building IRD format opened a wide range of technical possibilities, and contributes to improving users' experience (and therefore the success of the scientific Python ecosystem). This may become necessary for users to navigate in an exponentially growing
+To address some of the current limitations in documentation accessibility, building and maintaining, we have provided a new documentation framework called *Papyri*. We presented its features and underlying implementation choices (such as crosslink maintainance, decoupling building and rendering phases, enriching the rendering features, using the IRD format to create a unified syntax structure, etc.). While the project is still at its early stage, clear impacts can already be seen on the availability of high-quality documentation for end-users, and on the workload reduction for maintainers. Building IRD format opened a wide range of technical possibilities, and contributes to improving users' experience (and therefore the success of the scientific Python ecosystem). This may become necessary for users to navigate in an exponentially growing
 ecosystem.
 
 Acknowledgments
@@ -652,7 +653,7 @@ Funding
 
 M. B. received a 2-year grant from the Chan Zuckerberg
 Initiative (CZI) Essential Open Source Software for Science (EOS)
-– EOSS4-0000000017 via the NumFOCUS 501(3)c non profit to develop the Papyri project.
+– EOSS4-0000000017 via the NumFOCUS 501(3)c non profit to develop the *Papyri* project.
 
 
 
@@ -669,7 +670,8 @@ Initiative (CZI) Essential Open Source Software for Science (EOS)
 
 
 .. comment: 
-    In this talk we will demo and discuss the work that is being done on Papyri, a
+    In this talk we will demo and discuss the work that is being done on
+   *Papyri*, a
     new framework to provide rich documentation in Jupyter and Terminal IPython
     with plots, crosslink, equations. We will describe how libraries can opt-in to
     this new framework while still in beta to provide feedback, what are the trade-off of using it, the current
