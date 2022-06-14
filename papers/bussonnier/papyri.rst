@@ -97,9 +97,9 @@ In the scientific Python ecosystem, it is well known that Docutils [docutils]_
 and Sphinx [sphinx]_ are major cornerstones for publishing html documentation
 for Python. In fact, they are used by all the libraries in this ecosystem. While a few
 alternatives exist, most tools and services have some internal knowledge of
-Sphinx. For instance, `Read the Docs` [RTD]_ provides a specific Sphinx theme
+Sphinx. For instance, Read the Docs [RTD]_ provides a specific Sphinx theme
 [RTD-theme]_ users can opt-in to, `Jupyter-book` is built on top of Sphinx, and
-`MyST` parser [MYST]_ (which is made to allow markdown in documentation) 
+MyST parser [MYST]_ (which is made to allow markdown in documentation) 
 targets Sphinx as a backend, to name a few. All of the above provide an
 "ahead-of-time" documentation compilation and rendering, which is slow and
 computationally intensive. When a project needs its specific plugins, extensions
@@ -107,7 +107,7 @@ and configurations to properly build (which is almost always the case), it is
 relatively difficult to build documentation for a single object (like a single
 function, module or class). This makes AOT tools difficult to use for
 interactive exploration. One can then consider a JIT approach, as done
-for `Docrepr` (integrated both in `Jupyter` and `Spyder`). However in that case,
+for `Docrepr` (integrated both in `Jupyter` and Spyder [Spyder]_). However in that case,
 interactive documentation lacks inline plots, crosslinks, indexing, search and
 many custom directives.
 
@@ -115,7 +115,7 @@ Some of the above limitations are inherent to the design of documentation build
 tools that were intended for a separate documentation construction. While Sphinx does
 provide features like `intersphinx`, link resolutions are done at the documentation
 building phase. Thus, this is inherently unidirectional, and can break easily.
-To illustrate this, we consider `NumPy` and `SciPy`, two extremely close
+To illustrate this, we consider NumPy [NP]_ and SciPy [SP]_, two extremely close
 libraries. In order to obtain proper cross-linked documentation, one is required to perform at least five
 steps:
 
@@ -137,7 +137,7 @@ Only then can both SciPy's and NumPy's documentation refer to each other. As one
 Docstrings format
 -----------------
 
-The `Numpydoc` format is ubiquitous among the scientific ecosystem [NPDOC]_. It
+The *Numpydoc* format is ubiquitous among the scientific ecosystem [NPDOC]_. It
 is loosely based on RST syntax, and despite supporting full RST syntax,
 docstrings rarely contain full-featured directive. Maintainers are confronted to the following dilemma:
 
@@ -213,7 +213,7 @@ library currently being built. This is the case for example for the use of ``..
 code-block:``, or custom ``:rc:`` directive. The second one offers a more user
 friendly environment. For example,
 `sphinx-copybutton` [sphinx-copybutton]_ adds a button to easily copy code snippets in a single
-click, and `pydata-sphinx-theme` or `sphinx-rtd-dark-mode` [pydata-sphinx-theme]_ provide a different
+click, and `pydata-sphinx-theme` [pydata-sphinx-theme]_ or `sphinx-rtd-dark-mode`  provide a different
 appearance. As a consequence, developers must make choices on behalf of their
 end-users: this may concern syntax highlights, type annotations display,
 light/dark theme. 
@@ -259,7 +259,7 @@ At the moment, IRD files are currently separated into four main categories
 roughly following the Diátaxis framework [DT]_ and some technical needs:
 
 - API files describe the documentation for a single object, expressed as a
-  `Json` object. When possible, the information is encoded semantically (Objective (c)).
+  *JSON* object. When possible, the information is encoded semantically (Objective (c)).
   Files are organized based on the fully-qualified name of the Python object
   they reference, and contain either absolute reference to another object
   (library, version and identifier), or delayed references to objects that may
@@ -413,7 +413,7 @@ and unparse to the raw text only if the directive requires it.
 Serialisation of data structure into IRD files is currently using a custom
 serialiser. Future work includes maybe swapping to msgspec [msgspec]_. The AST objects are completely typed, however they contain a number of unions and sequences of unions. It turns out, many frameworks like ``pydantic`` do not support sequences of unions where each item in the union may be of a different type.
 
-The current Papyri strategy is to type-infer all code examples with `Jedi`, and pre-syntax highlight using `pygments` when possible.
+The current Papyri strategy is to type-infer all code examples with *Jedi* [JEDI]_, and pre-syntax highlight using `pygments` when possible.
 
 IRD File Installation
 ---------------------
@@ -493,7 +493,7 @@ The current Papyri implementation includes a certain number of rendering engines
 of them mostly consists of fetching a single page with its metadata, and
 walking through the IRD AST tree, and rendering each node with users' preferences. 
 
-- An ASCII terminal renders using `Jinja2`. This can be useful for piping
+- An ASCII terminal renders using Jinja2 [Jinja2]_. This can be useful for piping
   documentation to other tools like ``grep``, ``less``, ``cat``. 
   Then one can work in a highly restricted environment, making sure that
   reading the documentation is coherent. This can serve as a proxy for screen reading.
@@ -520,7 +520,7 @@ walking through the IRD AST tree, and rendering each node with users' preference
 
 - A static AOT rendering of all the existing pages that can be
   rendered ahead of time uses the same class as the JIT rendering. Basically, this loops through all entries in the SQLite database and renders
-  each item independently. This renderer is mostly used for exhaustive testing and performance measures for Papyri. This can render most of the API documentation of IPython, `Astropy`, `Dask`, `Distributed`, `Matplotlib`, `Networkx`, NumPy, `Pandas`, Papyri, SciPy, `Scikit-image` and others. It can represent ~28000 pages in ~60 seconds (that is ~450 pages/s on a recent Macbook pro M1).
+  each item independently. This renderer is mostly used for exhaustive testing and performance measures for Papyri. This can render most of the API documentation of IPython, `Astropy`, `Dask`, `Distributed`, Matplotlib [MPL]_ [MPL-DOI]_, `Networkx`, NumPy [NP]_, `Pandas`, Papyri, SciPy, `Scikit-image` and others. It can represent ~28000 pages in ~60 seconds (that is ~450 pages/s on a recent Macbook pro M1).
   
 
 For all of the above renderers, profiling shows that documentation rendering is
@@ -720,3 +720,10 @@ References
 .. [CODEMETA] https://codemeta.github.io/
 .. [TS] https://tree-sitter.github.io/tree-sitter/
 .. [TSRST] https://github.com/stsewd/tree-sitter-rst
+.. [JEDI] https://github.com/davidhalter/jedi
+.. [MPL]  J. D. Hunter, "Matplotlib: A 2D Graphics Environment", Computing in Science & Engineering, vol. 9, no. 3, pp. 90-95, 2007, 
+.. [MPL-DOI] https://doi.org/10.5281/zenodo.6513224
+.. [NP] Harris, C.R., Millman, K.J., van der Walt, S.J. et al. Array programming with NumPy. Nature 585, 357–362 (2020). DOI: 10.1038/s41586-020-2649-2
+.. [SP] Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, CJ Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E.A. Quintero, Charles R Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. (2020) SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17(3), 261-272. 10.1038/s41592-019-0686-2
+.. [Spyder] https://www.spyder-ide.org/
+.. [Jinja2] https://jinja.palletsprojects.com/
