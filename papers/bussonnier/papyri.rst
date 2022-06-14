@@ -138,7 +138,7 @@ Docstrings format
 -----------------
 
 The *Numpydoc* format is ubiquitous among the scientific ecosystem [NPDOC]_. It
-is loosely based on RST syntax, and despite supporting full RST syntax,
+is loosely based on *RST* syntax, and despite supporting full *RST* syntax,
 docstrings rarely contain full-featured directive. Maintainers are confronted to the following dilemma:
 
 - keep the docstrings simple. This means mostly text-based docstrings with few directive for efficient readability. The end-user may be exposed to raw docstring, there is no on-the-fly directive interpretation. This is the case for tools such as IPython and Jupyter. 
@@ -352,19 +352,19 @@ values such as indexing, searching, bookmarks and others, as seen in rustsdocs, 
 Current implementation
 ++++++++++++++++++++++
 
-We present here some of the technological choices made in the current Papyri
+We present here some of the technological choices made in the current *Papyri*
 implementation. The current implementation is targeting only a subset of
 projects and users that could make use of IRD, and are thus highly opinionated
 in order to minimise current scope and development effort. Understanding the
-implementation should also not be necessary to use Papyri either as a maintainer
-or a user, but can help understanding some of the current limitation.
+implementation should also **not** be **necessary to use** Papyri either as a maintainer
+or as a user, but can help understanding some of the current limitation.
 
 Nothing prevent alternatives and complementary implementations with different
 choices. As long as other implementations also produce (or consume) IRD bundles,
 they should be perfectly compatible and work together.
 
 The following sections are thus mostly informative to understand the state of
-the current code base. In particular we are mostly interested into:
+the current code base. In particular we restricted ourselves to:
 
 - Producing IRD bundle for the core scientific Python Projects (Numpy, SciPy,
   matplotlib...)
@@ -372,31 +372,32 @@ the current code base. In particular we are mostly interested into:
 
 
 Some of the technological choices also do not have other justification than the
-main developer having interests in them.
+main developer having interests in them, or making iteration on IRD format and
+main code base fast.
 
 IRD files generation
 --------------------
 
-For now, the current implementation of Papyri only targets some compatibility
-with Sphinx (a website and PDF documentation builder), reStructuredText (RST) as
-narrative documentation syntax and Numpydoc (both a project and standard for
-docstring formatting) as docstring format.
+The current implementation of Papyri only targets some compatibility
+with *Sphinx* (a website and PDF documentation builder), reStructuredText (RST) as
+narrative documentation syntax and *Numpydoc* (both a project and standard for
+docstring formatting).
 
 These are widely used by a majority of the core scientific Python ecosystem, and
-thus having Papyri and IRD bundles compatible with existing project is a
+thus having *Papyri* and IRD bundles compatible with existing project is a
 critical goal. We estimate that currently about 85% to 90% of current
-documentation pages currently being built with Sphinx, Rst and Numdoc works can
-be built with Papyri. Future work includes extensions to be compatible with MyST
-(a project to bring Markdown syntax to Sphinx).
+documentation pages currently being built with *Sphinx*, *RST* and *Numdoc* works can
+be built with Papyri. Future work includes extensions to be compatible with *MyST*
+(a project to bring *Markdown* syntax to *Sphinx*), but is not a priority.
 
-To understand RST Syntax in narrative documentation, RST documents need to be parsed.
+To understand *RST* Syntax in narrative documentation, *RST* documents need to be parsed.
 To do so Papyri  uses tree-sitter [TS]_ and tree-sitter-rst [TSRST]_ projects, allowing us to
-extract an "Abstract syntax tree" (AST) from the text files. When using
+extract an "Abstract Syntax Tree" (AST) from the text files. When using
 tree-sitter, AST nodes contain bytes-offsets into the original text buffer. Thus
 tree-sitter allowing us to easily "unparse" an AST node when necessary. This is
-relatively convenient for handling custom directives and limit cases (for
-instance, when projects rely on a loose definition of the RST syntax). Let us
-provide an example: RST directives are usually of the form::
+relatively convenient for handling custom directives and edge cases (for
+instance, when projects rely on a loose definition of the *RST* syntax). Let us
+provide an example: *RST* directives are usually of the form::
 
   .. directive:: arguments
       
@@ -429,9 +430,9 @@ exact version number is missing from the install command.
 
 With our current implementation IRD bundle are post-processed and stored in a
 different format for later just in time rendering. This is done purely for
-convenience and performance reasons for local usage.
+convenience and performance reasons in the case of local usage.
 
-For local rendering, we mostly need to the following operations::
+For local rendering, we mostly need to the following operations:
 
 1. Querying graph informations about cross links across documents.
 2. Rendering of a single page.
@@ -451,11 +452,13 @@ access pattern.
 
 SQlite allows us to easily query for object existence, and graph information
 (relationship between objects) at runtime. It is optimized for infrequent
-reading access. The goal is to move most of SQLite information resolving step at
-the installation time (such as looking for inter-libraries links). SQLite is
+reading access currently many queries are done at runtime, when rendering
+documentation. The goal is to move most of SQLite information resolving step at
+the installation time (such as looking for inter-libraries links) once the
+codebase and IRD format have stabilized. SQLite is
 less strongly typed than other relational or graph database and needs custom
 logic, but is ubiquitous on all systems and does not need a separate server
-process.
+process, making it an easy choice of database.
 
 CBOR is a more space efficient alternative to JSON. In particular keys in IRD
 are often highly redundant, and can be highly optimised when using CBOR.
@@ -465,7 +468,7 @@ compression/decompression, which seem a good compromised for potentially low
 performance user machines.
 
 Raw storage is used for binary blobs which needs to be accesses without further
-processing, typically images. This permits access with standard tools like image
+processing, typically images. This also permits access with standard tools like image
 viewers.
 
 Finally, access to all of these resources is provided via an internal
@@ -482,7 +485,7 @@ operations like adding/removing/replacing documents.
 
 Depending on the context where documentation is rendered and viewed, those
 choices should be adapted. For example an online archive to browse documentation
-for multiple projects and versions would likely decide to use an actual graph
+for multiple projects and versions may decide to use an actual graph
 database for object relation ship, and store other files on a CDN or blob
 storage for random access.
 
@@ -499,23 +502,28 @@ walking through the IRD AST tree, and rendering each node with users' preference
   reading the documentation is coherent. This can serve as a proxy for screen reading.
 
 - A Textual User Interface browser renders using `urwid`. Navigation within the
-  terminal is possible, one can reflow long lines on resized windows, and even open image files in external editors. Nonetheless, several bugs have been encountered in urwid. The project aims at replacing the
-  CLI IPython ``?`` interface (which currently only shows raw docstrings) in urwid with a new one written with Rich/Textual.
+  terminal is possible, one can reflow long lines on resized windows, and even
+  open image files in external editors. Nonetheless, several bugs have been
+  encountered in urwid. The project aims at replacing the CLI IPython *question
+  mark* (``obj?``) interface (which currently only shows raw docstrings) in
+  urwid with a new one written with **Rich**/**Textual**. For this interface,
+  having images stored raw on disk is useful as it allows us to directly call
+  into a system image viewer to display them.
 
 - A JIT rendering engine uses Jinja2, `Quart`, `Trio`. Quart is an async
   version of `flask` [flask]_. This option contains the most features, and therefore is the
   main one used for development. This environment lets us iterate over the rendering engine rapidly.
 
-  We used this serve to explore the User Interface design and navigation. In
+  We used this renderer to explore the User Interface design and navigation. In
   particular we found that a list of back references has limited uses, as it is
   difficult to judge the relevance of back references, or their relationship
-  with each other, and we are playing with a network graph rendering :ref:`localgraph`
-  of back references, and found that is seem to help with finding cluster or
+  with each other. We are playing with a network graph visualisation (Fig :ref:`localgraph`))
+  of back references, and found that is seem to help with finding cluster of
   similar information. This representation also have challenges when pages have
   a large number of back references as the graph become too busy.
 
   We've experience here one of the advantage of the papyri architecture,
-  creating this network graph did not require any regeneration of the documentation.
+  creating this network visualization did not require any regeneration of the documentation.
   We only had to update the template and re-render the current page.
 
 - A static AOT rendering of all the existing pages that can be
@@ -545,7 +553,7 @@ extension can be seen in Figure :ref:`jlab`.
 
 .. figure:: local-graph.png
 
-   Local graph (made with D3.js [D3js]_) representing the connections among the most important nodes around current page. Here when viewing ``numpy.ndarray``. 
+   Local graph (made with D3.js [D3js]_) representing the connections among the most important nodes around current page across many libraries. Here when viewing ``numpy.ndarray``. 
    Nodes are sized with respect to the number of incomming links, and colored with respect to their library. This graph is generated at render-time, and updates depending on the currently installed libraries, it can be conveninent to find related function and documentation, but can be challenging to read for highly connected items as seem here for ``numpy.ndarray``.  :label:`localgraph`
 
 
@@ -698,7 +706,7 @@ References
 ----------
 
 .. [AOT] https://en.wikipedia.org/wiki/Ahead-of-time_compilation
-.. [CFRG] https://conda-forge.org/
+.. [CFRG] conda-forge community. (2015). The conda-forge Project: Community-based Software Distribution Built on the conda Package Format and Ecosystem. Zenodo. http://doi.org/10.5281/zenodo.4774216
 .. [CODEMETA] https://codemeta.github.io/
 .. [D3js] https://d3js.org/
 .. [DT] https://diataxis.fr/
@@ -708,7 +716,7 @@ References
 .. [Jinja2] https://jinja.palletsprojects.com/
 .. [LTO] https://en.wikipedia.org/wiki/Interprocedural_optimization
 .. [MPL-DOI] https://doi.org/10.5281/zenodo.6513224
-.. [MPL]  J. D. Hunter, "Matplotlib: A 2D Graphics Environment", Computing in Science & Engineering, vol. 9, no. 3, pp. 90-95, 2007, 
+.. [MPL] J.D. Hunter, "Matplotlib: A 2D Graphics Environment", Computing in Science & Engineering, vol. 9, no. 3, pp. 90-95, 2007, 
 .. [MYST] https://myst-parser.readthedocs.io/en/latest/
 .. [NPDOC] https://numpydoc.readthedocs.io/en/latest/format.html
 .. [NP] Harris, C.R., Millman, K.J., van der Walt, S.J. et al. Array programming with NumPy. Nature 585, 357–362 (2020). DOI: 10.1038/s41586-020-2649-2
